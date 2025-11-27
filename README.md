@@ -9,8 +9,15 @@ The dataset includes:
 - Normalized FPKM gene expression values across multiple brain tissue samples
 - Differential expression results generated using DESeq2
 - Pathway enrichment results generated using FGSEA with MSigDB Hallmark pathways
+- You can access full dataset directly from GEO:
+https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE64810
 
-## Analysis & Shiny Application
+## Pre-Processing & Statistical Analysis
+- All core analysis steps were performed in R before building the Shiny app, using a standard RNA-seq workflow. Metadata was cleaned using dplyr to correct formatting, unify clinical fields, and prepare consistent sample annotations. Normalized FPKM counts were reshaped and filtered using variance and zero-count thresholds to reduce noise and focus on biologically meaningful genes.
+- Differential expression was carried out using DESeq2, which models RNA-seq counts with a negative binomial framework to estimate stable log2 fold changes and significance values. The ranked genes were then used as input for FGSEA, where Hallmark gene sets from msigdbr were evaluated across 1,000 permutations. 
+- This preprocessing pipeline produced all cleaned metadata, filtered expression matrices, DE results, and pathway enrichment outputs—which the Shiny application then renders interactively for exploration.
+
+## Shiny Application
 1. Sample Tab:
 This tab uses readr, dplyr, tidyr, and DT to read and clean metadata, generate structured summaries, and display interactive tables. I coded plotting using ggplot2, allowing the user to generate histograms, density plots, and violin plots by selecting any numeric variable and grouping column. The tab reacts instantly because all summaries and plots are built with reactive expressions in Shiny.
 
@@ -22,3 +29,9 @@ I used DESeq2 results that were precomputed in R and then processed in the Shiny
 
 5. GSEA Tab:
 GSEA was performed using fgsea and gene sets from msigdbr. I wrote code to rank genes, run enrichment with Hallmark pathways, flatten leading-edge lists, and save cleaned GSEA outputs. The Shiny tab displays these results using ggplot2 for barplots and NES–p-value scatter plots, and DT for sortable pathway tables. Users can filter pathways by NES direction or padj, and download the processed subset directly from the app.
+
+## Results
+
+The final analysis revealed a set of clear transcriptional shifts between disease and control groups. Several genes—including PPP1R1B, HTR2A, and RGS4—showed strong differential expression patterns, supported by distinct log2 fold-change distributions and visually separated jitter plots. After filtering, PCA demonstrated clearer clustering of samples, indicating improved structure in the dataset.
+
+Pathway enrichment further highlighted biologically meaningful signatures. Hallmark pathways such as Inflammatory Response, TNFα Signaling via NF-κB, Apoptosis, and Oxidative Phosphorylation appeared significantly enriched, reflecting expected stress and neurodegenerative processes in this dataset.
