@@ -42,3 +42,42 @@ GSEA was performed using fgsea and gene sets from msigdbr. I wrote code to rank 
 The final analysis revealed a set of clear transcriptional shifts between disease and control groups. Several genes—including PPP1R1B, HTR2A, and RGS4—showed strong differential expression patterns, supported by distinct log2 fold-change distributions and visually separated jitter plots. After filtering, PCA demonstrated clearer clustering of samples, indicating improved structure in the dataset.
 
 Pathway enrichment further highlighted biologically meaningful signatures. Hallmark pathways such as Inflammatory Response, TNFα Signaling via NF-κB, Apoptosis, and Oxidative Phosphorylation appeared significantly enriched, reflecting expected stress and neurodegenerative processes in this dataset.
+
+## How to Run the App
+
+You can run this Shiny application locally by cloning this repository or downloading all files as a folder. Once the files are on your computer, open the project in RStudio and set your working directory to the main project folder.
+
+Before running the app, install all required packages:
+
+```r
+install.packages(c(
+  "shiny", "tidyverse", "DT", "ggplot2", "ggbeeswarm"
+))
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install(c(
+  "GEOquery", "fgsea", "msigdbr"
+))
+```
+
+Load the libraries (optional but recommended to verify installation):
+
+```r
+library(shiny)
+library(tidyverse)
+library(DT)
+library(ggplot2)
+library(ggbeeswarm)
+library(GEOquery)
+library(fgsea)
+library(msigdbr)
+```
+
+Finally, run the application using:
+```r
+shiny::runApp("Code")
+```
+
+This will launch the full interactive Shiny interface, where you can upload metadata, counts, DESeq2 results, and fgsea outputs and explore the analyses.
