@@ -5,6 +5,14 @@
 ![Shiny](https://img.shields.io/badge/Shiny-Application-orange)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
 
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Dataset](#dataset)
+- [Pre-Processing & Statistical Analysis](#pre-processing--statistical-analysis)
+- [Shiny Application](#shiny-application)
+- [Results](#results)
+- [How to Run the App](#how-to-run-the-app)
+
 ## Project Overview 
 This project is an end-to-end RNA-seq analysis workflow built in R and deployed as an interactive Shiny application
 The goal of this project is to take a publicly available transcriptomic dataset, perform differential gene expression analysis (DGEA), run gene set enrichment analysis (GSEA), and provide an accessible dashboard for exploring results
