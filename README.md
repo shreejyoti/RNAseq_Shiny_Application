@@ -37,6 +37,8 @@ I used DESeq2 results that were precomputed in R and then processed in the Shiny
 5. GSEA Tab:
 GSEA was performed using fgsea and gene sets from msigdbr. I wrote code to rank genes, run enrichment with Hallmark pathways, flatten leading-edge lists, and save cleaned GSEA outputs. The Shiny tab displays these results using ggplot2 for barplots and NES–p-value scatter plots, and DT for sortable pathway tables. Users can filter pathways by NES direction or padj, and download the processed subset directly from the app.
 
+You can find the Shiny app code inside Code folder named as updated_version_app.R
+
 ## Results
 
 The final analysis revealed a set of clear transcriptional shifts between disease and control groups. Several genes—including PPP1R1B, HTR2A, and RGS4—showed strong differential expression patterns, supported by distinct log2 fold-change distributions and visually separated jitter plots. After filtering, PCA demonstrated clearer clustering of samples, indicating improved structure in the dataset.
@@ -77,7 +79,7 @@ library(msigdbr)
 
 Finally, run the application using:
 ```r
-shiny::runApp("Code")
+shiny::runApp("Code/updated_version_app.R")
 ```
 
 This will launch the full interactive Shiny interface, where you can upload metadata, counts, DESeq2 results, and fgsea outputs and explore the analyses.
